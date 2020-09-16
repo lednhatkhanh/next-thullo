@@ -1,0 +1,12 @@
+{
+  "extends": ["react-app", "plugin:@next/next/recommended"],
+  "rules": {
+    "@next/next/no-html-link-for-pages": ["error", "src/pages"],
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "useRecoilCallback"
+      }
+    ]
+  }
+}

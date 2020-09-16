@@ -1,0 +1,10 @@
+{
+    "cSpell.words": [
+        "Chakra",
+        "Thullo",
+        "esnext",
+        "fortawesome"
+    ],
+    "editor.formatOnSave": true,
+    "typescript.tsdk": "/Users/khanh/workspace/personal/next-thullo/node_modules/typescript/lib"
+}

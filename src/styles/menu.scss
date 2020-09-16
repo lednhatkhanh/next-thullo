@@ -1,0 +1,24 @@
+[data-reach-menu-list] {
+  @apply shadow-md border rounded-md py-2;
+
+  &:focus {
+    @apply outline-none;
+  }
+}
+
+[data-reach-menu-item] {
+  @apply flex w-48 px-4 py-2 bg-white cursor-pointer text-sm text-gray-700 gap-x-2 items-center;
+
+  &:hover,
+  &:active {
+    @apply bg-gray-200;
+  }
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &[data-selected] {
+    @apply bg-gray-200 text-gray-700;
+  }
+}
