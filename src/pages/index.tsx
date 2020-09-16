@@ -2,7 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 
 import { useGetCurrentUser } from 'src/business/auth';
-import { AppBar, Spinner, Typography } from 'src/components';
+import { AppBar, Spinner, Typography, Container } from 'src/components';
 import { client } from 'src/utils';
 import { GetBoardsInput, GetBoardsResponse } from 'src/server/api';
 import { useAppQuery } from 'src/hooks';
@@ -27,7 +27,7 @@ function HomePage() {
     <>
       <AppBar />
 
-      <main className="container pt-6 mx-auto">
+      <Container>
         <div className="flex items-center justify-between">
           <Typography component="h1" size="2xl">
             All Boards
@@ -39,7 +39,7 @@ function HomePage() {
         <div className="h-6"></div>
 
         <BoardList boards={getBoardsResponse?.boards ?? []} />
-      </main>
+      </Container>
     </>
   );
 }

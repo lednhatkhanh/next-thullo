@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import React from 'react';
-import { OverridableComponentProps } from '../types';
+import { OverridableProps } from '../types';
 
 type BaseProps = { size: 'sm' | 'lg' | 'xl' | '2xl' };
-type Props<C extends React.ElementType> = OverridableComponentProps<C, BaseProps>;
+type Props<C extends React.ElementType> = OverridableProps<C, BaseProps>;
 
 function Typography<C extends React.ElementType = 'p'>({
   component,

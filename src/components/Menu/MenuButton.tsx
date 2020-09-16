@@ -1,9 +1,8 @@
 import React from 'react';
 import { MenuButton as ReachMenuButton, MenuButtonProps } from '@reach/menu-button';
-import { Button } from '../Button';
-import { ExtendableProps } from '../types';
+import { Button, ButtonProps } from '../Button';
 
-type Props = ExtendableProps<typeof Button, MenuButtonProps>;
+type Props = ButtonProps & MenuButtonProps;
 
 function MenuButton({ children, ...rest }: Props) {
   return (

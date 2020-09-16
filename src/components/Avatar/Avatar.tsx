@@ -7,11 +7,11 @@ type BaseProps = {
 };
 type Props = ExtendableProps<'img', BaseProps>;
 
-function Avatar({ className, alt, size = 'md', ...restProps }: Props) {
+function Avatar({ className, alt, size = 'sm', ...restProps }: Props) {
   return (
     <img
       {...restProps}
-      className={clsx('rounded-full object-cover', { md: 'w-10 h-10', sm: 'w-8 h-8' }[size], className)}
+      className={clsx('rounded-lg object-cover', { md: 'w-10 h-10', sm: 'w-8 h-8' }[size], className)}
       alt={alt}
     />
   );

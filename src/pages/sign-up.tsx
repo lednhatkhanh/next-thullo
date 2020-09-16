@@ -114,7 +114,7 @@ function SignUpPage() {
               ) : null}
             </FormControl>
 
-            <Button type="submit" isFullWidth variant="primary" isLoading={signUpStatus === 'loading'}>
+            <Button type="submit" isFullWidth color="primary" isLoading={signUpStatus === 'loading'}>
               Sign up
             </Button>
 

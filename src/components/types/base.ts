@@ -1,12 +1,12 @@
 import React from 'react';
 
 export type ExtendableProps<Component extends React.ElementType, Props extends object = {}> = Omit<
-  React.ComponentPropsWithoutRef<Component>,
+  React.ComponentPropsWithRef<Component>,
   keyof Props
 > &
   Props;
 
-export type OverridableComponentProps<Component extends React.ElementType, Props extends object = {}> = ExtendableProps<
+export type OverridableProps<Component extends React.ElementType, Props extends object = {}> = ExtendableProps<
   Component,
   Props
 > & { component?: Component };

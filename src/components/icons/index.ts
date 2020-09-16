@@ -5,3 +5,5 @@ export * from './PlusIcon';
 export * from './LockOpenIcon';
 export * from './LockClosedIcon';
 export * from './PhotographIcon';
+export * from './DotsHorizontalIcon';
+export * from './ViewGridIcon';

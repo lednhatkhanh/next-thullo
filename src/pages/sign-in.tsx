@@ -83,7 +83,7 @@ function SignInPage() {
               {form.errors.password ? <FormHelperText isError>{form.errors.password.message}</FormHelperText> : null}
             </FormControl>
 
-            <Button type="submit" isFullWidth variant="primary" isLoading={signInStatus === 'loading'}>
+            <Button type="submit" isFullWidth color="primary" isLoading={signInStatus === 'loading'}>
               Sign in
             </Button>
 

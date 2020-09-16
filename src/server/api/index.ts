@@ -7,3 +7,4 @@ export * from './create-board';
 export * from './get-boards';
 export * from './board';
 export * from './user';
+export * from './get-board';

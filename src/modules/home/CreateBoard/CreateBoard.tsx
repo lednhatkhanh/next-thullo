@@ -115,7 +115,7 @@ function CreateBoard() {
               control={form.control}
               render={({ value: isPrivate }) => (
                 <Button
-                  variant={isPrivate ? 'primary' : 'default'}
+                  color={isPrivate ? 'primary' : 'default'}
                   type="button"
                   className="flex-1"
                   onClick={toggleIsPrivate}
@@ -132,7 +132,7 @@ function CreateBoard() {
           <div className="flex justify-end gap-x-2">
             <Button type="button">Cancel</Button>
             <Button
-              variant="primary"
+              color="primary"
               type="submit"
               isLoading={createBoardStatus === 'loading'}
               icon={<PlusIcon className="w-5 h-5" />}

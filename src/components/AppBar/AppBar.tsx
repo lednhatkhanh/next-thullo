@@ -1,14 +1,23 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 
 import { useSignOut, currentUserAtom } from 'src/business/auth';
 import { Link } from '../Link';
 import { Avatar } from '../Avatar';
-import { ChevronDownIcon } from '../icons';
+import { ChevronDownIcon, ViewGridIcon } from '../icons';
 import { Menu, MenuButton, MenuItem, MenuList } from '../Menu';
 import { LogoutIcon } from '../icons';
+import { Button } from '../Button';
+import { Typography } from '../Typography';
 
-function AppBar() {
+type Props = {
+  title?: string;
+};
+
+function AppBar({ title }: Props) {
+  const router = useRouter();
   const signOut = useSignOut();
   const currentUser = useRecoilValue(currentUserAtom);
 
@@ -18,12 +27,36 @@ function AppBar() {
         <img src="/images/logo.svg" alt="Logo" />
       </Link>
 
+      {title || router.pathname !== '/' ? <div className="w-10"></div> : null}
+
+      {title ? (
+        <Typography component="h3" size="lg">
+          {title}
+        </Typography>
+      ) : null}
+
+      {title && router.pathname !== '/' ? (
+        <>
+          <div className="w-4"></div>
+          <div className="w-px h-8 bg-gray-500" />
+          <div className="w-4"></div>
+        </>
+      ) : null}
+
+      {router.pathname !== '/' ? (
+        <NextLink href="/" passHref>
+          <Button component="a" icon={<ViewGridIcon className="w-4 h-4" />}>
+            All boards
+          </Button>
+        </NextLink>
+      ) : null}
+
       <div className="flex-1" />
 
       {currentUser && (
         <Menu>
           <MenuButton variant="ghost">
-            <Avatar src="https://bumbag.style/bean.jpg" alt="User" />
+            <Avatar size="sm" src="https://bumbag.style/bean.jpg" alt="User" />
 
             <span>{currentUser.name}</span>
 
