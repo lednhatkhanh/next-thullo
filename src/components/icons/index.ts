@@ -7,3 +7,4 @@ export * from './LockClosedIcon';
 export * from './PhotographIcon';
 export * from './DotsHorizontalIcon';
 export * from './ViewGridIcon';
+export * from './CloseIcon';

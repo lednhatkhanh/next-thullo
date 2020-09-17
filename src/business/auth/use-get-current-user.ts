@@ -3,9 +3,9 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { client } from 'src/utils';
 import { useAppQuery } from 'src/hooks';
-import { CurrentUserResponse } from 'src/server/api';
 
 import { currentUserAtom } from './current-user-atom';
+import { CurrentUserResponse } from 'src/pages/api/current-user';
 
 function useGetCurrentUser() {
   const router = useRouter();

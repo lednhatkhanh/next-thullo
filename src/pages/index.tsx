@@ -1,5 +1,6 @@
 import React from 'react';
 import queryString from 'query-string';
+import { QueryStatus } from 'react-query';
 
 import { useGetCurrentUser } from 'src/business/auth';
 import { AppBar, Spinner, Typography, Container } from 'src/components';
@@ -15,7 +16,7 @@ function HomePage() {
     ({ take, skip }) => client(`/api/boards?${queryString.stringify({ take, skip })}`),
   );
 
-  if (isCheckingAuth || getBoardsStatus === 'loading') {
+  if (isCheckingAuth || getBoardsStatus !== QueryStatus.Success) {
     return (
       <div className="flex items-center justify-center w-screen h-screen">
         <Spinner className="w-12 h-12 text-blue-500" />
@@ -27,7 +28,7 @@ function HomePage() {
     <>
       <AppBar />
 
-      <Container>
+      <Container className="pt-6">
         <div className="flex items-center justify-between">
           <Typography component="h1" size="2xl">
             All Boards

@@ -24,9 +24,9 @@ const BaseButton = React.forwardRef<HTMLButtonElement, BaseButtonProps>(function
         'text-sm transition duration-200 ease-in-out rounded-md appearance-none flex justify-center items-center select-none focus:outline-none focus:shadow-outline disabled:opacity-75 disabled:cursor-not-allowed',
         {
           filled: {
-            default: 'text-gray-900 bg-gray-400 shadow-md',
-            primary: 'text-gray-100 bg-blue-700 shadow-md',
-            danger: 'text-gray-100 bg-red-700 shadow-md',
+            default: 'text-gray-900 bg-gray-400',
+            primary: 'text-gray-100 bg-blue-700',
+            danger: 'text-gray-100 bg-red-700',
           }[color],
           outlined: {
             default: 'border border-gray-400 text-gray-700',

@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { QueryStatus } from 'react-query';
+import queryString from 'query-string';
+
 import { useGetCurrentUser } from 'src/business/auth';
 import {
   AppBar,
@@ -14,25 +17,40 @@ import {
   Spinner,
 } from 'src/components';
 import { useAppQuery } from 'src/hooks';
+import { CreateList, List } from 'src/modules/boards';
 import { GetBoardResponse } from 'src/server/api';
 import { client } from 'src/utils';
+import { GetListsQuery, GetListsResponse } from '../api/lists';
 
 function BoardDetailsPage() {
   const router = useRouter();
+  const boardId = router.query.id;
   const { isLoading: isCheckingAuth } = useGetCurrentUser();
   const { data: getBoardResponse, status: getBoardStatus } = useAppQuery<GetBoardResponse>(
     'getBoard',
-    () => client(`/api/boards/${router.query.id}`),
+    () => {
+      const controller = new AbortController();
+      const promise = client(`/api/boards/${boardId}`, { signal: controller.signal });
+
+      (promise as any).cancel = () => controller.abort();
+
+      return promise;
+    },
     {
-      enabled: !!router.query.id,
+      enabled: !!boardId,
       onError() {
         router.replace('/');
       },
       refetchOnWindowFocus: false,
     },
   );
+  const { data: getListsResponse } = useAppQuery<GetListsResponse, [GetListsQuery]>(
+    'get-lists',
+    ({ take, skip }) => client(`/api/lists?${queryString.stringify({ take, skip, boardId: boardId })}`),
+    { enabled: !!boardId, refetchOnWindowFocus: false },
+  );
 
-  if (isCheckingAuth || getBoardStatus === 'loading') {
+  if (isCheckingAuth || getBoardStatus !== QueryStatus.Success) {
     return (
       <div className="flex items-center justify-center w-screen h-screen">
         <Spinner className="w-12 h-12 text-blue-500" />
@@ -65,11 +83,11 @@ function BoardDetailsPage() {
 
         <div className="h-6"></div>
 
-        <div className="w-full h-64 p-4 bg-gray-100 rounded-lg">
-          <button className="flex items-center justify-between w-64 px-4 py-2 text-sm leading-none text-blue-700 transition duration-200 ease-in-out bg-blue-100 rounded-md appearance-none select-none focus:outline-none focus:shadow-outline hover:bg-blue-200 hover:text-blue-800 active:bg-blue-100 active:text-blue-700">
-            Add another list
-            <PlusIcon className="w-4 h-4" />
-          </button>
+        <div className="flex items-start gap-x-3">
+          {getListsResponse?.lists.map((list) => (
+            <List key={list.id} list={list} />
+          ))}
+          <CreateList boardId={boardId as string} />
         </div>
       </Container>
     </>

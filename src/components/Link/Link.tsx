@@ -14,7 +14,7 @@ function Link({ children, className, href, as, replace, shallow, ...rest }: Prop
       <a
         {...rest}
         className={clsx(
-          'block prose-sm prose text-blue-700 transition duration-200 ease-in-out hover:underline focus:outline-none focus:shadow-outline',
+          'block text-sm text-blue-700 transition duration-200 ease-in-out hover:underline focus:outline-none focus:shadow-outline',
           className,
         )}
       >

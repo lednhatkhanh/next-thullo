@@ -1,4 +1,3 @@
-export * from './current-user';
 export * from './auth';
 export * from './error-response';
 export * from './sign-in';
@@ -8,3 +7,4 @@ export * from './get-boards';
 export * from './board';
 export * from './user';
 export * from './get-board';
+export * from './list';

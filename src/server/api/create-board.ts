@@ -1,9 +1,7 @@
-import { Board, User } from '@prisma/client';
+import { Board } from './board';
 
 export type CreateBoardResponse = {
-  board: Pick<Board, 'id' | 'coverUrl' | 'createdAt' | 'updatedAt' | 'isPrivate' | 'title'> & {
-    owner: Pick<User, 'avatar' | 'email' | 'id' | 'name'>;
-  };
+  board: Board;
 };
 
 export type CreateBoardInput = {

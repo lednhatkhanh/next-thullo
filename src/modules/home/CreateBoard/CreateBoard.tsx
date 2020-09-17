@@ -23,7 +23,7 @@ import { useAppMutation } from 'src/hooks';
 function CreateBoard() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const form = useForm<FormData>({
-    defaultValues: { title: '', isPrivate: false, coverUrl: undefined },
+    defaultValues: formInitialData,
     resolver: yupResolver(validationSchema),
   });
   const queryCache = useQueryCache();
@@ -152,5 +152,6 @@ const validationSchema = yupObject<FormData>({
   isPrivate: yupBoolean(),
   coverUrl: yupString(),
 });
+const formInitialData = { title: '', isPrivate: false, coverUrl: undefined };
 
 export { CreateBoard };
