@@ -10,7 +10,7 @@ export * from './Spinner';
 export * from './icons';
 export * from './Alert';
 export * from './Avatar';
-export * from './Portal';
 export * from './Menu';
 export * from './Container';
 export * from './IconButton';
+export * from './TextArea';

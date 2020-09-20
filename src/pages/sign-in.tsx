@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import { object as yupObject, string as yupString } from 'yup';
-import { useMutation } from 'react-query';
+import { QueryStatus, useMutation } from 'react-query';
 
 import { client } from 'src/utils';
 import { AuthResponse, ErrorResponse, SignInInput } from 'src/server/api';
@@ -83,7 +83,7 @@ function SignInPage() {
               {form.errors.password ? <FormHelperText isError>{form.errors.password.message}</FormHelperText> : null}
             </FormControl>
 
-            <Button type="submit" isFullWidth color="primary" isLoading={signInStatus === 'loading'}>
+            <Button type="submit" isFullWidth color="primary" isLoading={signInStatus === QueryStatus.Loading}>
               Sign in
             </Button>
 

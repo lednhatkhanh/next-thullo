@@ -1,4 +1,4 @@
-import { Menu, MenuItem, MenuList } from '@reach/menu-button';
+import { MenuItem, Menu, MenuList } from '@reach/menu-button';
 
 export * from './MenuButton';
-export { Menu, MenuItem, MenuList };
+export { MenuItem, Menu, MenuList };

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import { object as yupObject, string as yupString, ref as yupRef } from 'yup';
-import { useMutation } from 'react-query';
+import { QueryStatus, useMutation } from 'react-query';
 
 import { Button, Link, Typography, InfoIcon, Alert, FormControl, Label, Input, FormHelperText } from 'src/components';
 import { client } from 'src/utils';
@@ -114,7 +114,7 @@ function SignUpPage() {
               ) : null}
             </FormControl>
 
-            <Button type="submit" isFullWidth color="primary" isLoading={signUpStatus === 'loading'}>
+            <Button type="submit" isFullWidth color="primary" isLoading={signUpStatus === QueryStatus.Loading}>
               Sign up
             </Button>
 

@@ -8,3 +8,5 @@ export * from './PhotographIcon';
 export * from './DotsHorizontalIcon';
 export * from './ViewGridIcon';
 export * from './CloseIcon';
+export * from './UserCircleSmallIcon';
+export * from './DocumentTextSmallIcon';

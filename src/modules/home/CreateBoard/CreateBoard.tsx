@@ -3,7 +3,7 @@ import { Dialog } from '@reach/dialog';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import { object as yupObject, string as yupString, boolean as yupBoolean } from 'yup';
-import { useQueryCache } from 'react-query';
+import { QueryStatus, useQueryCache } from 'react-query';
 
 import {
   Button,
@@ -49,10 +49,12 @@ function CreateBoard() {
 
   const openDialog = () => {
     setIsOpen(true);
+    // controls.start({ opacity: 1 });
   };
 
   const closeDialog = () => {
     setIsOpen(false);
+    // controls.start({ opacity: 0 });
   };
 
   const toggleIsPrivate = () => {
@@ -70,10 +72,10 @@ function CreateBoard() {
       </Button>
 
       <Dialog
-        isOpen={isOpen}
         className="w-1/3 rounded-md shadow-md"
-        onDismiss={closeDialog}
         aria-labelledby="create-board-title"
+        isOpen={isOpen}
+        onDismiss={closeDialog}
       >
         <form noValidate onSubmit={form.handleSubmit(createBoard)}>
           <Typography size="xl" id="create-board-title">
@@ -115,13 +117,13 @@ function CreateBoard() {
               control={form.control}
               render={({ value: isPrivate }) => (
                 <Button
-                  color={isPrivate ? 'primary' : 'default'}
+                  color={!isPrivate ? 'primary' : 'default'}
                   type="button"
                   className="flex-1"
                   onClick={toggleIsPrivate}
                   icon={isPrivate ? <LockClosedIcon className="w-5 h-5" /> : <LockOpenIcon className="w-5 h-5" />}
                 >
-                  Private
+                  {isPrivate ? 'Private' : 'Public'}
                 </Button>
               )}
             />
@@ -130,11 +132,13 @@ function CreateBoard() {
           <div className="h-5"></div>
 
           <div className="flex justify-end gap-x-2">
-            <Button type="button">Cancel</Button>
+            <Button type="button" onClick={closeDialog}>
+              Cancel
+            </Button>
             <Button
               color="primary"
               type="submit"
-              isLoading={createBoardStatus === 'loading'}
+              isLoading={createBoardStatus === QueryStatus.Loading}
               icon={<PlusIcon className="w-5 h-5" />}
             >
               Create

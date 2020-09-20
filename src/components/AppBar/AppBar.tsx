@@ -22,7 +22,7 @@ function AppBar({ title }: Props) {
   const currentUser = useRecoilValue(currentUserAtom);
 
   return (
-    <header className="sticky inset-x-0 top-0 flex items-center px-6 py-3 bg-white shadow-md">
+    <header className="sticky flex items-center px-6 py-3 bg-white shadow-lg">
       <Link href="/">
         <img src="/images/logo.svg" alt="Logo" />
       </Link>
@@ -55,21 +55,25 @@ function AppBar({ title }: Props) {
 
       {currentUser && (
         <Menu>
-          <MenuButton variant="ghost">
-            <Avatar size="sm" src="https://bumbag.style/bean.jpg" alt="User" />
+          {({ isOpen }) => (
+            <>
+              <MenuButton variant="ghost">
+                <Avatar size="sm" src="https://bumbag.style/bean.jpg" alt="User" />
 
-            <span>{currentUser.name}</span>
+                <span>{currentUser.name}</span>
 
-            <div>
-              <ChevronDownIcon className="h-5" />
-            </div>
-          </MenuButton>
+                <div>
+                  <ChevronDownIcon className="h-5" />
+                </div>
+              </MenuButton>
 
-          <MenuList>
-            <MenuItem onSelect={signOut}>
-              <LogoutIcon className="w-5 h-5" /> Sign out
-            </MenuItem>
-          </MenuList>
+              <MenuList isOpen={isOpen}>
+                <MenuItem onSelect={signOut}>
+                  <LogoutIcon className="w-5 h-5" /> Sign out
+                </MenuItem>
+              </MenuList>
+            </>
+          )}
         </Menu>
       )}
     </header>

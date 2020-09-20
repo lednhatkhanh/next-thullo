@@ -2,11 +2,11 @@ import React from 'react';
 import { object as yupObject, string as yupString } from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { useForm } from 'react-hook-form';
-import { useQueryCache } from 'react-query';
+import { QueryStatus, useQueryCache } from 'react-query';
 
 import { Button, CloseIcon, FormControl, FormHelperText, IconButton, Input } from 'src/components';
 import { CreateListBody, CreateListResponse } from 'src/pages/api/lists/create-list';
-import { useAppMutation } from 'src/hooks';
+import { useAppMutation, useDisclosure } from 'src/hooks';
 import { client } from 'src/utils';
 import { AddButton } from '../AddButton';
 import { GetListsResponse } from 'src/pages/api/lists';
@@ -17,7 +17,7 @@ type Props = {
 
 function CreateList({ boardId }: Props) {
   const formRef = React.useRef<HTMLFormElement | null>(null);
-  const [isFormOpen, setIsFormOpen] = React.useState(false);
+  const { isOpen: isFormOpen, onClose: closeForm, onOpen: openForm } = useDisclosure();
   const form = useForm<FormData>({
     defaultValues: formInitialData,
     resolver: yupResolver(validationSchema),
@@ -40,14 +40,6 @@ function CreateList({ boardId }: Props) {
       },
     },
   );
-
-  const openForm = React.useCallback(() => {
-    setIsFormOpen(true);
-  }, []);
-
-  const closeForm = React.useCallback(() => {
-    setIsFormOpen(false);
-  }, []);
 
   const createList = (data: FormData) => {
     createListMutation({ title: data.title });
@@ -98,7 +90,12 @@ function CreateList({ boardId }: Props) {
               <CloseIcon className="w-5 h-5" />
             </IconButton>
 
-            <Button color="primary" className="self-end" isLoading={createListStatus === 'loading'} type="submit">
+            <Button
+              color="primary"
+              className="self-end"
+              isLoading={createListStatus === QueryStatus.Loading}
+              type="submit"
+            >
               Create
             </Button>
           </div>
